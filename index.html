@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스타일핏 (StyleFit) - AI 패션 플랫폼</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 상단 네비게이션 바 -->
+    <header>
+        <div class="logo">StyleFit 👗</div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">홈</a></li>
+                <li><a href="#ai-chat">AI 스타일리스트</a></li>
+                <li><a href="#market">마켓</a></li>
+                <li><a href="#closet">내 옷장</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 메인 컨테이너 -->
+    <main>
+        <!-- 히어로 섹션 -->
+        <section class="hero">
+            <h1>AI가 찾아주는 나만의 완벽한 핏과 코디</h1>
+            <p>신상품 쇼핑부터 중고 거래, 그리고 AI 실측 추천까지 한 번에 경험하세요.</p>
+        </section>
+
+        <!-- 대화형 AI 코디 추천 섹션 (Chat UI) -->
+        <section id="ai-chat" class="chat-section">
+            <h2>💬 AI 스타일리스트와 대화하기</h2>
+            <div class="chat-container">
+                <div class="chat-box" id="chatBox">
+                    <div class="message ai">
+                        안녕하세요! 오늘 어떤 스타일의 코디를 찾으시나요? 체형과 원하는 분위기를 말씀해 주세요! (예: "키 170cm 마른 체형에 어울리는 데이트룩 추천해줘")
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="userInput" placeholder="AI에게 코디를 물어보세요...">
+                    <button onclick="sendMessage()">전송</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 통합 마켓 상품 리스트 (신상 + 중고) -->
+        <section id="market" class="market-section">
+            <h2>🔥 추천 패션 아이템</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="badge new">신상품</div>
+                    <div class="product-img">🧥</div>
+                    <h3>오버사이즈 울 블레이저</h3>
+                    <p class="price">129,000원</p>
+                    <p class="fit-info">AI 실측: 어깨 50 | 가슴 58 | 총장 74</p>
+                </div>
+                <div class="product-card">
+                    <div class="badge used">중고/리셀</div>
+                    <div class="product-img">👖</div>
+                    <h3>미니멀 와이드 슬랙스 (상태 최상)</h3>
+                    <p class="price">35,000원</p>
+                    <p class="fit-info">AI 실측: 허리 38 | 총장 102</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 자바스크립트 간단 구현 -->
+    <script>
+        function sendMessage() {
+            const inputField = document.getElementById('userInput');
+            const chatBox = document.getElementById('chatBox');
+            const userText = inputField.value.trim();
+
+            if (userText === "") return;
+
+            // 유저 메시지 추가
+            const userDiv = document.createElement('div');
+            userDiv.classList.add('message', 'user');
+            userDiv.textContent = userText;
+            chatBox.appendChild(userDiv);
+
+            inputField.value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // AI 가상 응답 (1초 뒤)
+            setTimeout(() => {
+                const aiDiv = document.createElement('div');
+                aiDiv.classList.add('message', 'ai');
+                aiDiv.textContent = `"${userText}" 요청사항을 반영하여, 고객님 실측 사이즈에 딱 맞는 신상품 블레이저와 중고 슬랙스 세트를 조합해 드렸습니다! 장바구니에 담아드릴까요?`;
+                chatBox.appendChild(aiDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
